@@ -1,4 +1,51 @@
 <!DOCTYPE html>
 <html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="author" content="Ingo Hark">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="template/styles.css">
+        <title>Artist Page</title>
+    </head>
+    <style>
     
+    </style>
+    <body>
+        <div class="homepage">
+            <a href="/">Back to homepage</a>   
+        </div>
+        <div class="artist-info">
+            <h1>{{.Artist.Name}}</h1>
+            <img src="{{.Artist.Image}}" alt="{{.Artist.Name}} Image">
+            <br>
+            <h2>Members:</h2>
+            <u1>
+                {{range .Artist.Members}}
+                <li>{{.}}</li>
+                {{end}}
+            </u1>
+            <br>
+            <h2>Created in:</h2>
+            <p>{{.Artist.CreationDate}}</p>
+            <br>
+            <h2>First album:</h2>
+            <p>{{.Artist.FirstAlbum}}</p>
+            <br>
+        </div>  
+        <div class="relation-info">
+            <h2>Tour dates and locations:</h2>
+            <u1>
+                {{range $date, $locations := .Relations.DatesLocations}}
+                <li>
+                    <strong>{{$date}}</strong>
+                    <u1>
+                        {{range $locations}}
+                        <li>{{.}}</li>
+                        {{end}}
+                    </u1>
+                </li>
+                {{end}}
+            </u1>
+        </div>   
+    </body>
 </html>
