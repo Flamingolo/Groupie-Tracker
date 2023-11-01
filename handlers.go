@@ -26,6 +26,11 @@ type Relation struct {
 func mainHandler(w http.ResponseWriter, r *http.Request) {
 	artistURL := "https://groupietrackers.herokuapp.com/api/artists"
 
+	if r.URL.Path != "/"{
+		http.Error(w, "Bad request: Invalid URL path", http.StatusBadRequest)
+		return
+	}
+
 	resp, err := http.Get(artistURL)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -33,7 +38,11 @@ func mainHandler(w http.ResponseWriter, r *http.Request) {
 	defer resp.Body.Close()
 
 	if resp.StatusCode != http.StatusOK {
-		http.Error(w, fmt.Sprintf("API request failed: %s", resp.Status), resp.StatusCode)
+		if resp.StatusCode == http.StatusInternalServerError {
+			http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+		} else {
+			http.Error(w, fmt.Sprintf("API request failed: %s", resp.Status), resp.StatusCode)
+		}
 		return
 	}
 
@@ -84,7 +93,7 @@ func artistHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	formatedLocations := make(map[string][]string)
-	for location, dates := range relations.DatesLocations{
+	for location, dates := range relations.DatesLocations {
 		formatedLoc := formatArtist(location)
 		formatedLocations[formatedLoc] = dates
 	}
@@ -111,8 +120,8 @@ func artistHandler(w http.ResponseWriter, r *http.Request) {
 func formatArtist(input string) string {
 	parts := strings.Split(input, "_")
 	var formatted []string
-	for _, part := range parts{
-		if part != ""{
+	for _, part := range parts {
+		if part != "" {
 			formatted = append(formatted, strings.Title(part))
 		}
 	}
