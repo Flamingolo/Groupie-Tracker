@@ -8,6 +8,7 @@ import (
 
 func main() {
 
+	//Web design
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 	http.HandleFunc("/", mainHandler)
 	http.HandleFunc("/artist", artistHandler)
