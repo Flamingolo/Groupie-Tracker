@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="author" content="Ingo Hark">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/static/styles.css" type="text/css">
+        <title>Groupie Tracker</title>
+    </head>
+    <body>
+       <div class="area">
+        <h1 class="title">Groupie Tracker</h1>
+        <div class="container-index" id="container">
+            <fieldset class="artists">
+            {{ range .}}
+            <article class="border" id="{{ .ID }}">
+                <a href="artist?id={{ .ID }}">
+                    <img class="img" src="{{ .Image }}" alt="{{ .Name }}">
+                </a>
+                <div class="text-field">{{ .Name }}</div>
+            </article>
+            {{ end }}
+            </fieldset>
+        </div>
+       </div>
+    </body>
+</html>

@@ -1,0 +1,126 @@
+body{
+    background-image: url("/static/background.jpg");
+    -webkit-text-stroke-width: thin;
+    -webkit-text-stroke-color: blanchedalmond;
+    color: ghostwhite;
+}
+body:not(.homepage){
+    -webkit-text-stroke-width: thin;
+    -webkit-text-stroke-color: blanchedalmond;
+}
+
+fieldset {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.title{
+    display: flex;
+    justify-content: center;
+    margin: 75px;
+    font-family: Comic Sans MS, Comic Sans, cursive;
+    font-size: xxx-large;
+
+}
+.text-field{
+    display: flex;
+    justify-content: center;
+    font-family: Comic Sans MS, Comic Sans, cursive;
+    font-size: x-large;
+    padding: 8px;
+}
+
+.border{
+    border-style: groove;
+    border-top-style: groove;
+    border-right-style: groove;
+    border-bottom-style: groove;
+    border-left-style: groove;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    margin: 2px;
+    width: 300px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 5px;
+    padding-top: 15px;
+    background: #79666691;
+}
+.homepage{
+    display: block;
+    width: 190px;
+    height: auto;
+    font-size: larger;
+    color: snow;
+
+}
+
+.artist-name{
+    display: flex;
+    justify-content: center;
+    border-style: outset;
+}
+
+.artist-info{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+}
+.image{
+    width: 300px;
+    height: 300px;
+    max-width: 300px;
+    max-height: 300px;
+    height: auto;
+}
+.artist-data{
+    display: flex;
+    align-items: flex-start;
+    border-style: hidden;
+}
+
+.artist-members{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 25px;
+    border-style: inset;
+    width: 260px;
+    height: auto;
+    border-bottom: none;
+}
+.artist-creation{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 25px;
+    border-style: inset;
+    width: 260px;
+    height: auto;
+    border-bottom: none;
+}
+.artist-debut{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 25px;
+    border-style: inset;
+    width: 260px;
+    height: auto;
+    border-bottom: none;
+}
+.artist-tour{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 25px;
+    border-style: inset;
+    width: 260px;
+    height: auto;
+    border-bottom: none;
+}

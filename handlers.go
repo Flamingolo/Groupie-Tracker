@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"html/template"
 	"net/http"
+	"strings"
 )
 
 type Artist struct {
@@ -42,7 +43,7 @@ func mainHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	temp, err := template.ParseFiles("template/index.html")
+	temp, err := template.ParseFiles("static/index.html")
 	if err != nil {
 		http.Error(w, "Template error", http.StatusInternalServerError)
 		return
@@ -58,7 +59,6 @@ func artistHandler(w http.ResponseWriter, r *http.Request) {
 	URL := r.URL.Query().Get("id")
 	relationURL := fmt.Sprintf("https://groupietrackers.herokuapp.com/api/relation/%s", URL)
 	artistURL := fmt.Sprintf("https://groupietrackers.herokuapp.com/api/artists/%s", URL)
-
 
 	rel, err := http.Get(relationURL)
 	if err != nil {
@@ -83,12 +83,18 @@ func artistHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	tmpl, err := template.ParseFiles("template/artistpage.html")
+	formatedLocations := make(map[string][]string)
+	for location, dates := range relations.DatesLocations{
+		formatedLoc := formatArtist(location)
+		formatedLocations[formatedLoc] = dates
+	}
+	relations.DatesLocations = formatedLocations
+
+	tmpl, err := template.ParseFiles("static/artistpage.html")
 	if err != nil {
 		http.Error(w, "Template error", http.StatusInternalServerError)
 		return
 	}
-
 
 	if err := tmpl.Execute(w, struct {
 		Artist    Artist
@@ -100,4 +106,16 @@ func artistHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Error rendering template", http.StatusInternalServerError)
 		return
 	}
+}
+
+func formatArtist(input string) string {
+	parts := strings.Split(input, "_")
+	var formatted []string
+	for _, part := range parts{
+		if part != ""{
+			formatted = append(formatted, strings.Title(part))
+		}
+	}
+	formattedName := strings.Join(formatted, " ")
+	return formattedName
 }
